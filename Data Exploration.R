@@ -1,3 +1,4 @@
+# Importing DOD data on fledgling_tarsus size
 > de6 = read.csv(file = "DataExplodod.csv", head=TRUE)
 > head(de6)
 fledgling.tarsus.mm bombed parent.tarsus.mm parent.beak.mm parent.plumage.nm
@@ -17,6 +18,18 @@ Mean   :15.013                 Mean   :11.53    Mean   :17.00   Mean   :34.78
 Max.   :20.230                 Max.   :33.90    Max.   :20.88   Max.   :38.89    
 > hist(de6$fledgling.tarsus.mm)
 > boxplot(de6$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 ) 
+
+# Diagnostic plot of fledgling_tarsus size
+> summary(de6$bombed)
+No  Yes 
+4485 4485 
+> deb <- subset(de6medata, bombed == "No")
+> deby <- subset(de6medata, bombed == "Yes")
+> library(ggplot2)
+> require(ggplot2)
+> ggplot(data=de6medata, aes(x=bombed, y=de6medata$fledgling.tarsus.mm)) + geom_boxplot(aes(fill=bombed))
+
+#
 > boxplot.stats(de6$fledgling.tarsus.mm)$out
 [1] 10.344348 18.814091 10.415042 19.622967 11.061591  9.924046 19.793615 18.804691 19.371692 18.937246 19.407759 11.214324 11.227381
 [14] 11.165268 10.566287 19.154745 19.169724 10.749583 18.821026 18.874882 19.066757 19.703521 10.984297 11.133047 19.345957 11.055827
@@ -28,14 +41,7 @@ boxplot.stats(de6$fledgling.tarsus.mm, coef=1)$out
 [14] 11.836435 11.944929 17.922826 11.842830 12.022154 11.902106 11.861246 18.814091 18.120149 17.891882 11.574369 18.507937 12.173370
 [27] 12.130572 11.958883 18.274579 10.415042 18.370266 18.369006 11.562416 12.177883 18.119051 17.968577 17.876133 11.847892 18.166494
 [40] 18.656966 18.503813 18.165892 18.581129 18.143084 19.622967 18.061132 11.061591 12.096443 11.464460 11.386313 11.943833  9.924046
-> summary(de6$bombed)
-No  Yes 
-4485 4485 
-> deb <- subset(de6medata, bombed == "No")
-> deby <- subset(de6medata, bombed == "Yes")
-> library(ggplot2)
-> require(ggplot2)
-> ggplot(data=de6medata, aes(x=bombed, y=de6medata$fledgling.tarsus.mm)) + geom_boxplot(aes(fill=bombed))
+
 > par(mfrow = c(1, 2))
 > boxplot(deb$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="No", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
 > boxplot(deby$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="Yes", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
