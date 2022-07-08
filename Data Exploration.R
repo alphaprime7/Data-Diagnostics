@@ -1,4 +1,4 @@
-# Importing DOD data on fledgling_tarsus size
+# Importing DOD data on fledgling_tarsus size 
 > de6 = read.csv(file = "DataExplodod.csv", head=TRUE)
 > head(de6)
 fledgling.tarsus.mm bombed parent.tarsus.mm parent.beak.mm parent.plumage.nm
@@ -83,7 +83,10 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 > qqnorm(de6$fledgling.tarsus.mm, ylim = c(0,25), ylab= "Sample Quantities_Yes&No")
 > qqline(de6$fledgling.tarsus.mm, col = "green")
 
-#
+# Testing for Colinearity between independent variables. Colinearity is problematic because independent variables should be independent variables. With colinearity
+# cofficient estimates become very sensitive to minor changes and inflation of variance & standard error coefficients.
+# Solutions are to select independent variables very carefully or use a Principal component analysis (PCA)
+# It distorts interpretation but not necessarily the predictive ability of the model
 >> par(mfrow = c(2, 2))
 > plot(deb$parent.beak.mm, deb$parent.tarsus.mm, xlim=c(0, 25), ylim=c(0, 15), main = "Colinearity_parent tarsus vs Beak", xlab="Bombed_parentbeak", ylab="Bomed_parenttarsus")
 > plot(deb$parent.beak.mm, deb$parent.plumage.nm, xlim=c(0, 25), ylim=c(0, 50), main = "Colinearity_parent plummage vs Beak", xlab="Bombed_parentbeak", ylab="Bomed_parentplumage")
