@@ -29,7 +29,17 @@ No  Yes
 > require(ggplot2)
 > ggplot(data=de6medata, aes(x=bombed, y=de6medata$fledgling.tarsus.mm)) + geom_boxplot(aes(fill=bombed))
 
-#
+#Simple boxplot without Ggplot and Homoscedasticity test
+> par(mfrow = c(1, 2))
+> boxplot(deb$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="No", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
+> boxplot(deby$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="Yes", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
+> par(mfrow = c(1, 3))
+> plot(deb$fledgling.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Homogeneity", xlab="Bombed_fledgling tarsus", ylab="Not bomed_fledgling tarsus", pch="*", col="red", cex=2)
+> plot(deb$fledgling.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Homogeneity", xlab="Bombed_fledgling tarsus", ylab="Not bomed_fledgling tarsus", pch="20", col="red", cex=2)
+> plot(deb$fledgling.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Homogeneity", xlab="Bombed_fledgling tarsus", ylab="Not bomed_fledgling tarsus", pch=".", col="red", cex=2)
+> abline(lm(deb$fledgling.tarsus.mm ~ deby$fledgling.tarsus.mm), col="blue", lwd=3, lty=2)
+
+
 > boxplot.stats(de6$fledgling.tarsus.mm)$out
 [1] 10.344348 18.814091 10.415042 19.622967 11.061591  9.924046 19.793615 18.804691 19.371692 18.937246 19.407759 11.214324 11.227381
 [14] 11.165268 10.566287 19.154745 19.169724 10.749583 18.821026 18.874882 19.066757 19.703521 10.984297 11.133047 19.345957 11.055827
@@ -42,14 +52,7 @@ boxplot.stats(de6$fledgling.tarsus.mm, coef=1)$out
 [27] 12.130572 11.958883 18.274579 10.415042 18.370266 18.369006 11.562416 12.177883 18.119051 17.968577 17.876133 11.847892 18.166494
 [40] 18.656966 18.503813 18.165892 18.581129 18.143084 19.622967 18.061132 11.061591 12.096443 11.464460 11.386313 11.943833  9.924046
 
-> par(mfrow = c(1, 2))
-> boxplot(deb$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="No", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
-> boxplot(deby$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="Yes", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
-> par(mfrow = c(1, 3))
-> plot(deb$fledgling.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Homogeneity", xlab="Bombed_fledgling tarsus", ylab="Not bomed_fledgling tarsus", pch="*", col="red", cex=2)
-> plot(deb$fledgling.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Homogeneity", xlab="Bombed_fledgling tarsus", ylab="Not bomed_fledgling tarsus", pch="20", col="red", cex=2)
-> plot(deb$fledgling.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Homogeneity", xlab="Bombed_fledgling tarsus", ylab="Not bomed_fledgling tarsus", pch=".", col="red", cex=2)
-> abline(lm(deb$fledgling.tarsus.mm ~ deby$fledgling.tarsus.mm), col="blue", lwd=3, lty=2)
+# Determining normality of the data
 > par(mfrow = c(3, 2))
 > h1 = hist(deb$fledgling.tarsus.mm, xlab="Fledgling size_No", xlim=c(0,25), ylim=c(0,1300), main="Fledgling size HIstogram")
 > x=seq(10.03,20.23, length=4485)
@@ -79,6 +82,8 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 > qqline(deby$fledgling.tarsus.mm, col = "blue")
 > qqnorm(de6$fledgling.tarsus.mm, ylim = c(0,25), ylab= "Sample Quantities_Yes&No")
 > qqline(de6$fledgling.tarsus.mm, col = "green")
+
+#
 >> par(mfrow = c(2, 2))
 > plot(deb$parent.beak.mm, deb$parent.tarsus.mm, xlim=c(0, 25), ylim=c(0, 15), main = "Colinearity_parent tarsus vs Beak", xlab="Bombed_parentbeak", ylab="Bomed_parenttarsus")
 > plot(deb$parent.beak.mm, deb$parent.plumage.nm, xlim=c(0, 25), ylim=c(0, 50), main = "Colinearity_parent plummage vs Beak", xlab="Bombed_parentbeak", ylab="Bomed_parentplumage")
