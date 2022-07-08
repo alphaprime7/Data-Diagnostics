@@ -99,6 +99,31 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 > plot(deby$parent.beak.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Correlation_fledgling tarsus vs parent beak", xlab="Bombed_beak", ylab="Bomed_fledglingtarsus")
 > plot(deby$parent.tarsus.mm, deby$fledgling.tarsus.mm, xlim=c(0, 25), ylim=c(0, 25), main = "Correlation_fledgling tarsus vs parent tarsus", xlab="Bombed_parent tarsus", ylab="Bomed_fledglingtarsus")
 
+# Generating a correlation matrix
+# Packages for csv exporting include readr and data.table
+# write_csv(de6, "~/B/.csv") for readr
+# fwrite(df, "~/B/.csv")for data.table
+> de6.cor = cor(de6)
+> de6.cor2 = cor(de6, method = c("spearman"))
+> View(de6.cor)
+> View(de6.cor2)
+> palette = colorRampPalette(c("green", "white", "red")) (20) # define my color palette for the heatmap
+> heatmap(x = de6.cor1, col = palette, symm = T) # draw my heatmap using the de6.cor and not de6.cor1
+> write.csv(de6.cor, "~/BIOMETRY1/corrmatrix.csv", row.names=FALSE)
+> library(writexl)
+> write_xlsx(de6.corr,"~/BIOMETRY1/week7/corrmatrixexp.xlsx")
+Error in is.data.frame(x) : object 'de6.corr' not found
+# OR my favorite ggplot
+> install.packages("ggcorrplot")
+> library(ggcorrplot)
+> ggcorrplot(cor(de6))
+# OR usign corrplot
+> install.packages('corrplot')
+> library(corrplot)
+> corrplot(cor(de6))
+# OR using Hmisc
+> library(Hmisc)
+> rcorr(as.matrix(de6))
 
 
 
