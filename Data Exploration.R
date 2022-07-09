@@ -29,7 +29,7 @@ No  Yes
 > require(ggplot2)
 > ggplot(data=de6medata, aes(x=bombed, y=de6medata$fledgling.tarsus.mm)) + geom_boxplot(aes(fill=bombed))
 
-#Simple boxplot without Ggplot and Homoscedasticity test
+#Simple boxplot without Ggplot and Homoscedasticity test and determination of outliers without a for loop
 > par(mfrow = c(1, 2))
 > boxplot(deb$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="No", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
 > boxplot(deby$fledgling.tarsus.mm, method = "jitter", notch=TRUE, main="Fledgling tarsus size_boxplot", ylab="Fledgling tarsus size", xlab="Yes", col = "grey", whiskcol=c("green"), outcol=c("blue"), outbg=c("grey"), staplecol=c('violet'), medcol=c("red"), boxcol=c("yellow"), outcex=1.5, outpch=21 )
