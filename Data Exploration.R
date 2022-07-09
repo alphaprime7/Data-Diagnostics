@@ -111,8 +111,7 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 > heatmap(x = de6.cor1, col = palette, symm = T) # draw my heatmap using the de6.cor and not de6.cor1
 > write.csv(de6.cor, "~/BIOMETRY1/corrmatrix.csv", row.names=FALSE)
 > library(writexl)
-> write_xlsx(de6.corr,"~/BIOMETRY1/week7/corrmatrixexp.xlsx")
-Error in is.data.frame(x) : object 'de6.corr' not found
+> write_xlsx(de6.cor,"~/BIOMETRY1/week7/corrmatrixexp.xlsx")
 # OR my favorite ggplot
 > install.packages("ggcorrplot")
 > library(ggcorrplot)
